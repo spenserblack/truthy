@@ -52,6 +52,12 @@ impl_truthy_num!(u64);
 impl_truthy_num!(u128);
 impl_truthy_num!(usize);
 
+impl<T> Truthy for Option<T> {
+    fn truthy(&self) -> bool {
+        self.is_some()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Truthy;
@@ -295,7 +301,9 @@ mod tests {
 
         #[test]
         fn falsy() {
-            assert!(!None.truthy())
+            let none: Option<()> = None;
+
+            assert!(!none.truthy())
         }
     }
     mod results {
