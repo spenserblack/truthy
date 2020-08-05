@@ -28,6 +28,30 @@ pub trait Truthy {
     fn truthy(&self) -> bool;
 }
 
+macro_rules! impl_truthy_num {
+    ($type:ty) => {
+        impl $crate::Truthy for $type {
+            fn truthy(&self) -> bool {
+                let falsy: $type = 0;
+                !self.eq(&falsy)
+            }
+        }
+    };
+}
+
+impl_truthy_num!(i8);
+impl_truthy_num!(i16);
+impl_truthy_num!(i32);
+impl_truthy_num!(i64);
+impl_truthy_num!(i128);
+impl_truthy_num!(isize);
+impl_truthy_num!(u8);
+impl_truthy_num!(u16);
+impl_truthy_num!(u32);
+impl_truthy_num!(u64);
+impl_truthy_num!(u128);
+impl_truthy_num!(usize);
+
 #[cfg(test)]
 mod tests {
     use super::Truthy;
