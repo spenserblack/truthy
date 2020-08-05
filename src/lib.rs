@@ -92,7 +92,7 @@ mod tests {
 
             #[test]
             fn truthy() {
-                assert!(!(1i64).truthy())
+                assert!((1i64).truthy())
             }
 
             #[test]
@@ -105,7 +105,7 @@ mod tests {
 
             #[test]
             fn truthy() {
-                assert!(!(1i128).truthy())
+                assert!((1i128).truthy())
             }
 
             #[test]
@@ -118,7 +118,7 @@ mod tests {
 
             #[test]
             fn truthy() {
-                assert!(!(1isize).truthy())
+                assert!((1isize).truthy())
             }
 
             #[test]
@@ -131,7 +131,7 @@ mod tests {
 
             #[test]
             fn truthy() {
-                assert!(!(1u8).truthy())
+                assert!((1u8).truthy())
             }
 
             #[test]
