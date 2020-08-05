@@ -58,6 +58,12 @@ impl<T> Truthy for Option<T> {
     }
 }
 
+impl<T, E> Truthy for Result<T, E> {
+    fn truthy(&self) -> bool {
+        self.is_ok()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Truthy;
@@ -311,12 +317,16 @@ mod tests {
 
         #[test]
         fn truthy() {
-            assert!(Ok(":)").truthy())
+            let ok: Result<_, ()> = Ok(":)");
+
+            assert!(ok.truthy())
         }
 
         #[test]
         fn falsy() {
-            assert!(!Err(":(").truthy())
+            let err: Result<(), _> = Err(":(");
+
+            assert!(!err.truthy())
         }
     }
     mod tuples {
