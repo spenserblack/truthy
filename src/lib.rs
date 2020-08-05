@@ -21,6 +21,18 @@
 //! # python
 //! bool(my_value)
 //! ```
+//!
+//! # Example
+//!
+//! ```
+//! use truthy::Truthy;
+//!
+//! fn do_something<T: Truthy>(value: T) {
+//!     if value.truthy() {
+//!         println!("It's truthy :)");
+//!     }
+//! }
+//! ```
 
 /// Convert to a `bool`.
 pub trait Truthy {
