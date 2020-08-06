@@ -363,7 +363,7 @@ mod tests {
         use super::Truthy;
 
         #[test]
-        fn truthy() {
+        fn truthy_inner() {
             assert!(Some("I'm here!").truthy())
         }
 
@@ -373,12 +373,17 @@ mod tests {
 
             assert!(!none.truthy())
         }
+
+        #[test]
+        fn falsy_inner() {
+            assert!(Some(()).falsy())
+        }
     }
     mod results {
         use super::Truthy;
 
         #[test]
-        fn truthy() {
+        fn truthy_inner() {
             let ok: Result<_, ()> = Ok(":)");
 
             assert!(ok.truthy())
@@ -389,6 +394,13 @@ mod tests {
             let err: Result<(), _> = Err(":(");
 
             assert!(!err.truthy())
+        }
+
+        #[test]
+        fn falsy_inner() {
+            let ok: Result<_, ()> = Ok(());
+
+            assert!(ok.falsy())
         }
     }
     mod tuples {
