@@ -1,4 +1,6 @@
 # truthy
+[![Build Status](https://travis-ci.com/spenserblack/truthy.svg?branch=master)](https://travis-ci.com/spenserblack/truthy)
+
 Check if a value is "truthy"
 
 In other words,
