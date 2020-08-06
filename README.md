@@ -70,3 +70,12 @@ let not_empty_tuple = (1, "2", '3');
 empty_tuple.truthy() // false
 not_empty_tuple.truthy() // true
 ```
+
+## Features
+### `and-or`
+This crate has an `and-or` feature, which will provide the functions `truthy_and` and `truthy_or` to
+any type that implements `Truthy` and `Sized`.
+For example, `true.truthy_and("It was truthy!")` returns `Some("It was truthy!")`.
+You can run the [example][and-or example] with `cargo run --features and-or --example and_or`.
+
+[and-or example]: https://github.com/spenserblack/truthy-rs/blob/master/examples/and_or.rs
