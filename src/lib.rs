@@ -22,6 +22,8 @@
 //! bool(my_value)
 //! ```
 //!
+//! enable the `and-or` feature to get access to `truthy_and` and `truthy_or`.
+//!
 //! # Behavior
 //! ```
 //! # use truthy::Truthy;
@@ -59,6 +61,8 @@
 //!     }
 //! }
 //! ```
+#[cfg(feature = "and-or")]
+use and_or::{Either, Left, Right};
 
 /// Convert to a `bool`.
 pub trait Truthy {
@@ -66,6 +70,36 @@ pub trait Truthy {
     fn truthy(&self) -> bool;
     fn falsy(&self) -> bool {
         !self.truthy()
+    }
+    #[cfg(feature = "and-or")]
+    /// `Left(self)` if `self` is truthy, else `Right(other)`
+    ///
+    /// ```rust
+    /// # use truthy::Truthy;
+    /// assert_eq!(true.truthy_or('t').left(), Some(true));
+    /// assert_eq!(false.truthy_or('t').right(), Some('t'));
+    /// ```
+    fn truthy_or<T>(self, other: T) -> Either<Self, T> where Self: Sized {
+        if self.truthy() {
+            Left(self)
+        } else {
+            Right(other)
+        }
+    }
+    #[cfg(feature = "and-or")]
+    /// `Some(other)` if `self` is truthy, else `None`
+    ///
+    /// ```rust
+    /// # use truthy::Truthy;
+    /// assert_eq!(true.truthy_and('t'), Some('t'));
+    /// assert_eq!(false.truthy_and('t'), None);
+    /// ```
+    fn truthy_and<T>(self, other: T) -> Option<T> where Self: Sized {
+        if self.truthy() {
+            Some(other)
+        } else {
+            None
+        }
     }
 }
 
