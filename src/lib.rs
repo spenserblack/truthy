@@ -96,6 +96,12 @@ impl Truthy for () {
     }
 }
 
+impl Truthy for &str {
+    fn truthy(&self) -> bool {
+        !self.is_empty()
+    }
+}
+
 impl<T> Truthy for Option<T> {
     fn truthy(&self) -> bool {
         self.is_some()
