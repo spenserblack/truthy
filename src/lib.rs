@@ -22,7 +22,33 @@
 //! bool(my_value)
 //! ```
 //!
-//! # Example
+//! # Behavior
+//! ```
+//! # use truthy::Truthy;
+//! let truthy_option = Some(1u32);
+//! let falsy_options = [None, Some(0u32)];
+//!
+//! assert!(truthy_option.truthy());
+//! for falsy_option in &falsy_options {
+//!     assert!(falsy_option.falsy());
+//! }
+//!
+//! let truthy_result: Result<_, ()> = Ok(1u32);
+//! let falsy_results = [Ok(false), Err(false), Err(true)];
+//!
+//! assert!(truthy_result.truthy());
+//! for falsy_result in &falsy_results {
+//!     assert!(falsy_result.falsy());
+//! }
+//!
+//! let not_empty = vec![()];
+//! let empty: [();0] = [];
+//!
+//! assert!(not_empty.truthy());
+//! assert!(empty.falsy());
+//! ```
+//!
+//! # Example Usage
 //!
 //! ```
 //! use truthy::Truthy;
@@ -441,7 +467,7 @@ mod tests {
 
         #[test]
         fn truthy() {
-            assert!((1, 2).truthy())
+            assert!((1, "2", '3').truthy())
         }
 
         #[test]
