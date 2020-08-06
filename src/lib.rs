@@ -45,6 +45,8 @@
 //!     }
 //! }
 //! ```
+#![cfg_attr(feature = "no-std", no_std)]
+
 #[cfg(feature = "and-or")]
 use either::{Either, Left, Right};
 
