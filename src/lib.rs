@@ -90,6 +90,18 @@ impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10}
 impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11}
 impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12}
 
+impl Truthy for f32 {
+    fn truthy(&self) -> bool {
+        !self.eq(&0f32)
+    }
+}
+
+impl Truthy for f64 {
+    fn truthy(&self) -> bool {
+        !self.eq(&0f64)
+    }
+}
+
 impl Truthy for () {
     fn truthy(&self) -> bool {
         false
