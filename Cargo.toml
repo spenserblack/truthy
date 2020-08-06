@@ -27,6 +27,10 @@ and-or = ["either"]
 [dependencies]
 either = { version = "1", optional = true }
 
+[[example]]
+name = "and_or"
+required-features = ["and-or"]
+
 [badges]
 is-it-maintained-issue-resolution = { repository = "spenserblack/truthy" }
 is-it-maintained-open-issues = { repository = "spenserblack/truthy" }
