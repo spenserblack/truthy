@@ -114,9 +114,13 @@ impl Truthy for &str {
     }
 }
 
-impl<T> Truthy for Option<T> {
+impl<T> Truthy for Option<T> where T: Truthy {
     fn truthy(&self) -> bool {
-        self.is_some()
+        if let Some(v) = self {
+            v.truthy()
+        } else {
+            false
+        }
     }
 }
 
