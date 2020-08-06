@@ -2,7 +2,9 @@
 //!
 //! In other words,
 //!
-//! ```rust,ignore
+//! ```
+//! # use truthy::Truthy;
+//! # let my_value = true;
 //! // rust
 //! my_value.truthy();
 //! ```
