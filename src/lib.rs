@@ -1,25 +1,9 @@
-//! Mimic the "truthy" behavior of languages like JavaScript and Python.
-//!
-//! In other words,
+//! Check if a value is "truthy"
 //!
 //! ```
 //! # use truthy::Truthy;
 //! # let my_value = true;
-//! // rust
 //! my_value.truthy();
-//! ```
-//!
-//! Should behave similarly to
-//!
-//! ```javascript
-//! // javascript
-//! !!myValue;
-//! Boolean(myValue);
-//! ```
-//! or
-//! ```python
-//! # python
-//! bool(my_value)
 //! ```
 //!
 //! Enable the `and-or` feature to get access to `truthy_and` and `truthy_or`.
