@@ -54,6 +54,16 @@ macro_rules! impl_truthy_num {
     };
 }
 
+macro_rules! impl_truthy_tuple {
+    ($($G:ident),+) => {
+        impl<$($G),+> $crate::Truthy for ($($G),+,) {
+            fn truthy(&self) -> bool {
+                true
+            }
+        }
+    }
+}
+
 impl_truthy_num!(i8);
 impl_truthy_num!(i16);
 impl_truthy_num!(i32);
@@ -66,6 +76,19 @@ impl_truthy_num!(u32);
 impl_truthy_num!(u64);
 impl_truthy_num!(u128);
 impl_truthy_num!(usize);
+
+impl_truthy_tuple! {T1}
+impl_truthy_tuple! {T1, T2}
+impl_truthy_tuple! {T1, T2, T3}
+impl_truthy_tuple! {T1, T2, T3, T4}
+impl_truthy_tuple! {T1, T2, T3, T4, T5}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11}
+impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12}
 
 impl Truthy for () {
     fn truthy(&self) -> bool {
