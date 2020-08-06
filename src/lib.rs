@@ -1,5 +1,3 @@
-#![no_std]
-
 //! Mimic the "truthy" behavior of languages like JavaScript and Python.
 //!
 //! In other words,
