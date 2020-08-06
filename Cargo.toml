@@ -21,9 +21,9 @@ exclude = [
 all-features = true
 
 [features]
-default = []
+default = ["std"]
 and-or = ["either"]
-no-std = []
+std = []
 
 [dependencies]
 either = { version = "1", optional = true }
