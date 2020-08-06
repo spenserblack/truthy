@@ -17,6 +17,9 @@ exclude = [
     "CHANGELOG.md",
 ]
 
+[package.metadata.docs.rs]
+all-features = true
+
 [features]
 default = []
 and-or = ["either"]
