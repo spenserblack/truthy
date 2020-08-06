@@ -9,6 +9,13 @@ readme = "README.md"
 keywords = ["bool", "boolean", "truthy"]
 categories = []
 repository = "https://github.com/spenserblack/truthy"
+exclude = [
+    ".travis.yml",
+    ".editorconfig",
+    ".github/*",
+    ".gitignore",
+    "CHANGELOG.md",
+]
 publish = false
 
 [dependencies]
