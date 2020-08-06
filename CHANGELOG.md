@@ -4,5 +4,8 @@
 ### Added
 - `and-or` feature
 
+### Changed
+- Made use of `std` library optional
+
 ## 1.0.0 :tada:
 Initial version
