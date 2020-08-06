@@ -67,6 +67,12 @@ impl_truthy_num!(u64);
 impl_truthy_num!(u128);
 impl_truthy_num!(usize);
 
+impl Truthy for () {
+    fn truthy(&self) -> bool {
+        false
+    }
+}
+
 impl<T> Truthy for Option<T> {
     fn truthy(&self) -> bool {
         self.is_some()
