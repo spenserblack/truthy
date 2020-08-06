@@ -17,8 +17,12 @@ exclude = [
     "CHANGELOG.md",
 ]
 
+[features]
+default = []
+and-or = ["either"]
+
 [dependencies]
-and-or = { version = "1", optional = true, package = "either" }
+either = { version = "1", optional = true }
 
 [badges]
 is-it-maintained-issue-resolution = { repository = "spenserblack/truthy" }

@@ -62,7 +62,7 @@
 //! }
 //! ```
 #[cfg(feature = "and-or")]
-use and_or::{Either, Left, Right};
+use either::{Either, Left, Right};
 
 /// Convert to a `bool`.
 pub trait Truthy {
