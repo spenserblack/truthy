@@ -16,7 +16,6 @@ exclude = [
     ".gitignore",
     "CHANGELOG.md",
 ]
-publish = false
 
 [dependencies]
 
