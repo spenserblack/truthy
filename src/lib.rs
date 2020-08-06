@@ -38,6 +38,9 @@
 pub trait Truthy {
     /// Converts `&self` to a `bool`.
     fn truthy(&self) -> bool;
+    fn falsy(&self) -> bool {
+        !self.truthy()
+    }
 }
 
 macro_rules! impl_truthy_num {
