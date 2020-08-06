@@ -132,6 +132,12 @@ impl<T, E> Truthy for Result<T, E> where T: Truthy {
     }
 }
 
+impl<T> Truthy for [T] {
+    fn truthy(&self) -> bool {
+        self.len() > 0
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Truthy;
@@ -349,7 +355,9 @@ mod tests {
 
         #[test]
         fn falsy() {
-            assert!(!Vec::new().truthy())
+            let empty_vec: Vec<()> = Vec::new();
+
+            assert!(empty_vec.falsy())
         }
     }
     mod arrays {
@@ -362,7 +370,9 @@ mod tests {
 
         #[test]
         fn falsy() {
-            assert!(![].truthy())
+            let empty_array: [();0] = [];
+
+            assert!(empty_array.falsy())
         }
     }
     mod options {
