@@ -52,6 +52,7 @@ use either::{Either, Left, Right};
 pub trait Truthy {
     /// Converts `&self` to a `bool`.
     fn truthy(&self) -> bool;
+    /// Not truthy
     fn falsy(&self) -> bool {
         !self.truthy()
     }
