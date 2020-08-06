@@ -22,7 +22,7 @@
 //! bool(my_value)
 //! ```
 //!
-//! enable the `and-or` feature to get access to `truthy_and` and `truthy_or`.
+//! Enable the `and-or` feature to get access to `truthy_and` and `truthy_or`.
 //!
 //! # Behavior
 //! ```
