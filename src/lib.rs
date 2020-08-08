@@ -107,6 +107,12 @@ macro_rules! truthy {
     ( ( $( $tokens:tt )+ ) ) => {
         ( $crate::truthy!( $( $tokens )+ ) )
     };
+    ( ( $( $tokens:tt )+ ) && $( $remainder:tt )+ ) => {
+        ( $crate::truthy!( $( $tokens )+ ) ) && $crate::truthy!( $( $remainder )+ )
+    };
+    ( ( $( $tokens:tt )+ ) || $( $remainder:tt )+ ) => {
+        ( $crate::truthy!( $( $tokens )+ ) ) || $crate::truthy!( $( $remainder )+ )
+    };
     ( $i:ident ) => {
         $i.truthy()
     };
