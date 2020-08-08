@@ -101,7 +101,21 @@ pub trait Truthy {
 /// ```
 #[macro_export]
 macro_rules! truthy {
-    () => unimplemented!("truthy!");
+    ( ! $( $tokens:tt )+ ) => {
+        ! $crate::truthy!( $( $tokens )+ )
+    };
+    ( ( $( $tokens:tt )+ ) ) => {
+        ( $crate::truthy!( $( $tokens )+ ) )
+    };
+    ( $i:ident ) => {
+        $i.truthy()
+    };
+    ( $i:ident && $($remainder:tt)+ ) => {
+        $i.truthy() && $crate::truthy!( $($remainder)+ )
+    };
+    ( $i:ident || $($remainder:tt)+ ) => {
+        $i.truthy() || $crate::truthy!( $($remainder)+ )
+    };
 }
 
 macro_rules! impl_truthy_num {
