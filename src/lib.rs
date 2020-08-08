@@ -88,6 +88,22 @@ pub trait Truthy {
     }
 }
 
+/// Convenience macro for evaluating truthiness.
+///
+/// Helps avoid repeatedly typing `.truthy()` in a long boolean chain.
+///
+/// ```
+/// # use truthy::{Truthy, truthy};
+/// # let x = 1u8;
+/// # let y = 0u8;
+/// # let z = 0u8;
+/// assert_eq!(x.truthy() && (y.truthy() || !z.truthy()), truthy!(x && (y || !z)));
+/// ```
+#[macro_export]
+macro_rules! truthy {
+    () => unimplemented!("truthy!");
+}
+
 macro_rules! impl_truthy_num {
     ($type:ty) => {
         impl $crate::Truthy for $type {
