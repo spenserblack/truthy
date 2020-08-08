@@ -9,6 +9,6 @@ jobs:
 notifications:
   email: false
 script:
-  - cargo build
+  - cargo build --verbose
   - cargo build --verbose --all-features
   - cargo test --verbose --all-features
