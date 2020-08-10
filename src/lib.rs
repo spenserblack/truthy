@@ -88,6 +88,42 @@ pub trait Truthy {
     }
 }
 
+/// Convenience macro for evaluating truthiness.
+///
+/// Helps avoid repeatedly typing `.truthy()` in a long boolean chain.
+///
+/// ```
+/// # use truthy::{Truthy, truthy};
+/// # let x = 1u8;
+/// # let y = 0u8;
+/// # let z = 0u8;
+/// assert_eq!(x.truthy() && (y.truthy() || !z.truthy()), truthy!(x && (y || !z)));
+/// ```
+#[macro_export]
+macro_rules! truthy {
+    ( ! $( $tokens:tt )+ ) => {
+        ! $crate::truthy!( $( $tokens )+ )
+    };
+    ( ( $( $tokens:tt )+ ) ) => {
+        ( $crate::truthy!( $( $tokens )+ ) )
+    };
+    ( ( $( $tokens:tt )+ ) && $( $remainder:tt )+ ) => {
+        ( $crate::truthy!( $( $tokens )+ ) ) && $crate::truthy!( $( $remainder )+ )
+    };
+    ( ( $( $tokens:tt )+ ) || $( $remainder:tt )+ ) => {
+        ( $crate::truthy!( $( $tokens )+ ) ) || $crate::truthy!( $( $remainder )+ )
+    };
+    ( $i:ident ) => {
+        $i.truthy()
+    };
+    ( $i:ident && $($remainder:tt)+ ) => {
+        $i.truthy() && $crate::truthy!( $($remainder)+ )
+    };
+    ( $i:ident || $($remainder:tt)+ ) => {
+        $i.truthy() || $crate::truthy!( $($remainder)+ )
+    };
+}
+
 macro_rules! impl_truthy_num {
     ($type:ty) => {
         impl $crate::Truthy for $type {
@@ -493,5 +529,23 @@ mod tests {
         fn falsy() {
             assert!(!().truthy())
         }
+    }
+}
+
+#[cfg(test)]
+mod macro_tests {
+    use super::{Truthy, truthy};
+    
+    /// A few different uses of `truthy!`
+    #[test]
+    fn truthy_macro() {
+        let x = true;
+        let y = false;
+        let z = false;
+        
+        assert!(truthy!(x && (y || !z)));
+        assert!(truthy!(x && (!y || z)));
+        assert!(truthy!((x && !y) || z));
+        assert!(truthy!(((!(!x) && !!!y) || z)));
     }
 }
