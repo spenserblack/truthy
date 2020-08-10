@@ -128,8 +128,8 @@ macro_rules! impl_truthy_num {
     ($type:ty) => {
         impl $crate::Truthy for $type {
             fn truthy(&self) -> bool {
-                let falsy: $type = 0;
-                !self.eq(&falsy)
+                const FALSY: $type = 0;
+                !self.eq(&FALSY)
             }
         }
     };
