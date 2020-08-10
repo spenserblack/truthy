@@ -60,6 +60,7 @@ macro appends `.truthy()` to save you time.
 ```rust
 let my_bool = truthy!(x && y || !z);
 ```
+You can run the [example][truthy! example] with `cargo run --example truthy_macro`.
 
 ### Limitations
 The `truthy!` macro cannot take non-boolean expressions. The only valid tokens in `truthy!` are
@@ -81,4 +82,5 @@ any type that implements `Truthy` and `Sized`.
 For example, `true.truthy_and("It was truthy!")` returns `Some("It was truthy!")`.
 You can run the [example][and-or example] with `cargo run --features and-or --example and_or`.
 
+[truthy! example]: https://github.com/spenserblack/truthy-rs/blob/master/examples/truthy_macro.rs
 [and-or example]: https://github.com/spenserblack/truthy-rs/blob/master/examples/and_or.rs
