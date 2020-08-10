@@ -61,6 +61,19 @@ macro appends `.truthy()` to save you time.
 let my_bool = truthy!(x && y || !z);
 ```
 
+### Limitations
+The `truthy!` macro cannot take non-boolean expressions. The only valid tokens in `truthy!` are
+`(`, `)`, `!`, `&&`, `||`, and identities. For example, the following would fail to compile.
+```rust
+truthy!(Some(1).unwrap() && 0 + 1);
+```
+To get around this, you would need to assign the expressions before using `truthy!`.
+```rust
+let x = Some(1).unwrap();
+let y = 0 + 1;
+truthy!(x && y);
+```
+
 ## Features
 ### `and-or`
 This crate has an `and-or` feature, which will provide the functions `truthy_and` and `truthy_or` to
