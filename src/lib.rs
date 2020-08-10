@@ -535,14 +535,14 @@ mod tests {
 #[cfg(test)]
 mod macro_tests {
     use super::{Truthy, truthy};
-    
+
     /// A few different uses of `truthy!`
     #[test]
     fn truthy_macro() {
         let x = true;
         let y = false;
         let z = false;
-        
+
         assert!(truthy!(x && (y || !z)));
         assert!(truthy!(x && (!y || z)));
         assert!(truthy!((x && !y) || z));
