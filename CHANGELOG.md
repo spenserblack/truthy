@@ -4,6 +4,8 @@
 ### Added
 - Implementation of `Truthy` for `str`
   - Allows `String` to inherit implementation from `Deref<Target=str>`
+- Implementation of `Truthy` for `Either`
+  - Requires `either` feature to be enabled
 
 ## [1.1.0]
 ### Added

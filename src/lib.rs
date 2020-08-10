@@ -45,7 +45,7 @@
 //!     }
 //! }
 //! ```
-#[cfg(feature = "and-or")]
+#[cfg(feature = "either")]
 use either::{Either, Left, Right};
 
 /// Convert to a `bool`.
@@ -223,6 +223,16 @@ impl<T, E> Truthy for Result<T, E> where T: Truthy {
             v.truthy()
         } else {
             false
+        }
+    }
+}
+
+#[cfg(feature = "either")]
+impl<L, R> Truthy for Either<L, R> where L: Truthy, R: Truthy {
+    fn truthy(&self) -> bool {
+        match self {
+            Left(l) => l.truthy(),
+            Right(r) => r.truthy(),
         }
     }
 }
