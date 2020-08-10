@@ -51,6 +51,16 @@ empty_tuple.truthy() // false
 not_empty_tuple.truthy() // true
 ```
 
+## `truthy!` macro
+```rust
+let my_bool = x.truthy() && y.truthy() || !z.truthy();
+```
+The above code can be a bit annoying, having to repeat `.truthy()` multiple times. The `truthy!`
+macro appends `.truthy()` to save you time.
+```rust
+let my_bool = truthy!(x && y || !z);
+```
+
 ## Features
 ### `and-or`
 This crate has an `and-or` feature, which will provide the functions `truthy_and` and `truthy_or` to
