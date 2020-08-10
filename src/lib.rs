@@ -201,6 +201,12 @@ impl Truthy for str {
     }
 }
 
+impl Truthy for &str {
+    fn truthy(&self) -> bool {
+        !self.is_empty()
+    }
+}
+
 impl<T> Truthy for Option<T> where T: Truthy {
     fn truthy(&self) -> bool {
         if let Some(v) = self {
