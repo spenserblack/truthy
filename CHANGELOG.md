@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased](https://github.com/spenserblack/truthy-rs/compare/v1.1.0...HEAD)
+### Changed
+- `impl Truthy for str` to `&str`
+  - Allows `String` to inherit implementation from `Deref<Target=str>`
 
 ## [1.1.0]
 ### Added

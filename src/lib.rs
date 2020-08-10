@@ -195,7 +195,7 @@ impl Truthy for () {
     }
 }
 
-impl Truthy for &str {
+impl Truthy for str {
     fn truthy(&self) -> bool {
         !self.is_empty()
     }
