@@ -127,6 +127,7 @@ macro_rules! truthy {
 macro_rules! impl_truthy_num {
     ($type:ty) => {
         impl $crate::Truthy for $type {
+            /// `true` if not equal to `0`
             fn truthy(&self) -> bool {
                 const FALSY: $type = 0;
                 !self.eq(&FALSY)
@@ -138,6 +139,7 @@ macro_rules! impl_truthy_num {
 macro_rules! impl_truthy_tuple {
     ($($G:ident),+) => {
         impl<$($G),+> $crate::Truthy for ($($G),+,) {
+            /// Always `true` because it contains value(s)
             fn truthy(&self) -> bool {
                 true
             }
@@ -172,42 +174,90 @@ impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11}
 impl_truthy_tuple! {T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12}
 
 impl Truthy for bool {
+    /// Just returns `self`
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert_eq!(true, true.truthy());
+    /// assert_eq!(false, false.truthy());
+    /// ```
     fn truthy(&self) -> bool {
         *self
     }
 }
 
 impl Truthy for f32 {
+    /// "truthy" if not `0.0`
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(0.1f32.truthy());
+    /// assert!(!0.0f32.truthy());
+    /// ```
     fn truthy(&self) -> bool {
         !self.eq(&0f32)
     }
 }
 
 impl Truthy for f64 {
+    /// "truthy" if not `0.0`
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(0.1f64.truthy());
+    /// assert!(!0.0f64.truthy());
+    /// ```
     fn truthy(&self) -> bool {
         !self.eq(&0f64)
     }
 }
 
 impl Truthy for () {
+    /// Always `false` since `()` represents no value
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(().falsy());
+    /// ```
     fn truthy(&self) -> bool {
         false
     }
 }
 
 impl Truthy for str {
+    /// `true` if not empty
+    ///
+    /// This implementation is mainly used to allow this method to be available
+    /// to types that implement `Deref<Target=str>`, such as `String`.
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(String::from(" ").truthy());
+    /// ```
     fn truthy(&self) -> bool {
         !self.is_empty()
     }
 }
 
 impl Truthy for &str {
+    /// `true` if not empty
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(" ".truthy());
+    /// ```
     fn truthy(&self) -> bool {
         !self.is_empty()
     }
 }
 
 impl<T> Truthy for Option<T> where T: Truthy {
+    /// `true` if not `None` and contained value is "truthy"
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!(Some(true).truthy());
+    /// ```
     fn truthy(&self) -> bool {
         if let Some(v) = self {
             v.truthy()
@@ -218,6 +268,13 @@ impl<T> Truthy for Option<T> where T: Truthy {
 }
 
 impl<T, E> Truthy for Result<T, E> where T: Truthy {
+    /// `true` if not `Err` and contained value is "truthy"
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// let result: Result<bool, ()> = Ok(true);
+    /// assert!(result.truthy());
+    /// ```
     fn truthy(&self) -> bool {
         if let Ok(v) = self {
             v.truthy()
@@ -229,6 +286,16 @@ impl<T, E> Truthy for Result<T, E> where T: Truthy {
 
 #[cfg(feature = "either")]
 impl<L, R> Truthy for Either<L, R> where L: Truthy, R: Truthy {
+    /// `true` if contained value is "truthy"
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// # use either::{Either, Left, Right};
+    /// let left: Either<_, ()> = Left(true);
+    /// let right: Either<(), _> = Right(true);
+    /// assert!(left.truthy());
+    /// assert!(right.truthy());
+    /// ```
     fn truthy(&self) -> bool {
         match self {
             Left(l) => l.truthy(),
@@ -238,6 +305,12 @@ impl<L, R> Truthy for Either<L, R> where L: Truthy, R: Truthy {
 }
 
 impl<T> Truthy for [T] {
+    /// `true` if not empty
+    ///
+    /// ```
+    /// # use truthy::Truthy;
+    /// assert!([(), (), ()].truthy());
+    /// ```
     fn truthy(&self) -> bool {
         self.len() > 0
     }
